@@ -1,10 +1,11 @@
 import time
-import pandas as pd
-import numpy as np
 
-CITY_DATA = { 'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
+import pandas as pd
+
+CITY_DATA = {'chicago': 'chicago.csv',
+             'new york city': 'new_york_city.csv',
+             'washington': 'washington.csv'}
+
 
 def get_filters():
     """
@@ -18,15 +19,15 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('Would you like to see data for Chicago, New York, or Washington?')
-    while city not in(CITY_DATA.keys()):
+    while city not in (CITY_DATA.keys()):
         print('you provided invalid city name')
         city = input('Would you like to see data for Chicago, New York, or Washington?').lower()
 
     # get user input for month (all, january, february, ... , june)
-    months = ["january", "february", "march", "april", "may", "june"]
+    month = ["january", "february", "march", "april", "may", "june"]
     if filter == "month" or filter == "both":
         month = input("Which month - January, February, March, April, May, or June").lower()
-        while month not in months:
+        while month not in month:
             print("You provided invalid month")
             month = input("Which month - January, February, March, April, May, June").lower()
         else:
@@ -41,12 +42,12 @@ def get_filters():
         day = input("Which day - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday? ").title()
     else:
         day = "all"
-        print('-'*40)
+        print('-' * 40)
 
     return city, month, day
 
 
-def load_data(city, month, day):
+def load_data(city):
     """
     Loads data for the specified city and filters by month and day if applicable.
 
@@ -83,7 +84,7 @@ def time_stats(df):
     print(f'The most common start hour is: {popular_hour}')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def station_stats(df):
@@ -105,7 +106,7 @@ def station_stats(df):
     print(f'The most popular trip is: from {popular_trip.mode()[0]}')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def trip_duration_stats(df):
@@ -131,7 +132,7 @@ def trip_duration_stats(df):
     print(f'Average travel time is: {days} days {hours} hours {minutes} minutes {seconds} seconds')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def user_stats(df):
@@ -145,24 +146,24 @@ def user_stats(df):
     print('\n\n')
 
     # Display counts of gender
-    if 'Gender' in (df.columns):
+    if 'Gender' in df.columns:
         print(df['Gender'].value_counts())
     print('\n\n')
 
     # Display earliest, most recent, and most common year of birth
-    if 'Birth Year' in (df.columns):
+    if 'Birth Year' in df.columns:
         year = df['Birth Year'].fillna(0).astype('int64')
     print(
         f'Earliest birth year is: {year.min()}\nmost recent is: {year.max()}\nand most common birth year is: {year.mode()[0]}')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def main():
     while True:
         city, month, day = get_filters()
-        df = load_data(city, month, day)
+        df = load_data(city)
 
         time_stats(df)
         station_stats(df)
@@ -175,4 +176,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()
