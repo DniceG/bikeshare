@@ -1,5 +1,5 @@
 import time
-
+import numpy as np
 import pandas as pd
 
 CITY_DATA = {'chicago': 'chicago.csv',
@@ -70,9 +70,9 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-    months = ['january', 'february', 'march', 'april', 'may', 'june']
+    month = ['january', 'february', 'march', 'april', 'may', 'june']
     month = df['month'].mode()[0]
-    print(f'The most common month is: {months[month - 1]}')
+    print(f'The most common month is: {month[month - 1]}')
 
     # display the most common day of week
     day = df['day_of_week'].mode()[0]
@@ -153,8 +153,8 @@ def user_stats(df):
     # Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         year = df['Birth Year'].fillna(0).astype('int64')
-    print(
-        f'Earliest birth year is: {year.min()}\nmost recent is: {year.max()}\nand most common birth year is: {year.mode()[0]}')
+        print(
+            f'Earliest birth year is: {year.min()}\nmost recent is: {year.max()}\nand most common birth year is: {year.mode()[0]}')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
